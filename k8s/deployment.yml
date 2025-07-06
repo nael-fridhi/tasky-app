@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tasky-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tasky-app
+  template:
+    metadata:
+      labels:
+        app: tasky-app
+    spec:
+      containers:
+      - name: tasky-app
+        image: gcr.io/YOUR_PROJECT_ID/tasky-app:latest
+        ports:
+        - containerPort: 8080
