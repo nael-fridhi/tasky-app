@@ -29,7 +29,12 @@ jobs:
         with:
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
-      - name: Configure Docker for Artifact Registry
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'
+        with:
+          project_id: '${{ env.GCP_PROJECT_ID }}'
+
+      - name: 'Docker auth'
         run: |
           gcloud auth configure-docker ${{ env.REGISTRY }}
 
