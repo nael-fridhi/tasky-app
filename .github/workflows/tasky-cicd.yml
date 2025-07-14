@@ -47,16 +47,33 @@ jobs:
         run: |
           gcloud artifacts docker images scan ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest --format=json --quiet > scan-result.json
           cat scan-result.json
+  delpoy:
+    needs: build-and-push-image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      REGISTRY: us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/tasky-docker-images
+      IMAGE_NAME: tasky-app
+    steps:
+      # 1. Checkout the repository code
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Install gke-gcloud-auth-plugin
-        run: |
-          gcloud components install gke-gcloud-auth-plugin
+      - name: Google Auth
+        id: auth
+        uses: 'google-github-actions/auth@v1'
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
 
-      - name: 'Get GKE credentials'
-        run: |
-          gcloud container clusters get-credentials tasky-gke-cluster \
-            --zone us-central1-a \
-            --project ${{ secrets.GCP_PROJECT_ID }}
+      - name: Get GKE credentials
+        uses: google-github-actions/get-gke-credentials@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          location: us-central1-a
+          cluster_name: tasky-gke-cluster
 
       - name: 'Deploy to GKE'
         run: |
