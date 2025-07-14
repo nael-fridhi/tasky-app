@@ -43,23 +43,7 @@ jobs:
           docker build -t "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest" .
           docker push "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
 
-
-      # - name: Extract metadata (tags, labels) for Docker
-      #   id: meta
-      #   uses: docker/metadata-action@v5
-      #   with:
-      #     images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-      #     flavor: |
-      #       latest=true
-
-      # - name: Build and push Docker image
-      #   uses: docker/build-push-action@v5
-      #   with:
-      #     context: .
-      #     push: true
-      #     tags: ${{ steps.meta.outputs.tags }}
-      #     labels: ${{ steps.meta.outputs.labels }}
-      # - name: Scan image with Container Analysis
-      #   run: |
-      #     gcloud artifacts docker images scan ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest --format=json > scan-result.json
-      #     cat scan-result.json
+      - name: Scan image with Container Analysis
+        run: |
+          gcloud artifacts docker images scan ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest --format=json > scan-result.json
+          cat scan-result.json
