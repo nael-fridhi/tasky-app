@@ -48,6 +48,10 @@ jobs:
           gcloud artifacts docker images scan ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest --format=json --quiet > scan-result.json
           cat scan-result.json
 
+      - name: Install gke-gcloud-auth-plugin
+        run: |
+          gcloud components install gke-gcloud-auth-plugin
+
       - name: 'Get GKE credentials'
         run: |
           gcloud container clusters get-credentials tasky-gke-cluster \
