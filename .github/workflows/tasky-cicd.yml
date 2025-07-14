@@ -45,5 +45,5 @@ jobs:
 
       - name: Scan image with Container Analysis
         run: |
-          gcloud artifacts docker images scan ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest --format=json > scan-result.json
+          gcloud artifacts docker images scan ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest --format=json --quiet > scan-result.json
           cat scan-result.json
