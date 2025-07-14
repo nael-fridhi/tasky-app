@@ -47,3 +47,13 @@ jobs:
         run: |
           gcloud artifacts docker images scan ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest --format=json --quiet > scan-result.json
           cat scan-result.json
+
+      - name: 'Get GKE credentials'
+        run: |
+          gcloud container clusters get-credentials tasky-gke-cluster \
+            --zone us-central1-a \
+            --project ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: 'Deploy to GKE'
+        run: |
+          kubectl apply -f k8s/
