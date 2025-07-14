@@ -36,7 +36,7 @@ jobs:
 
       - name: 'Docker auth'
         run: |
-          gcloud auth configure-docker ${{ env.REGISTRY }}
+          gcloud auth configure-docker us-central1-docker.pkg.dev
 
       - name: 'Build and push container'
         run: |-
