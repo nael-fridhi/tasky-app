@@ -12,7 +12,7 @@ Tasky application is a task management app developed using Golang and MongoDB as
 ## Docker
 A Dockerfile has been provided to run this application.  The default port exposed is 8080. Also you can find K8s resources to deploy the application to Google Kubernetes Engine.
 
-![](./tasky-k8s.png)
+![](./k8s.svg)
 
 ## Environment Variables
 The following environment variables are needed.
