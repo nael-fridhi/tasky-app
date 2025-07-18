@@ -1,7 +1,18 @@
-# Docker
+# Tasky App
+Tasky application is a task management app developed using Golang and MongoDB as Database. It's used as a testing app for our Google Cloud services hands-on quickstart.
+
+[![build](https://github.com/nael-fridhi/tasky-app/actions/workflows/tasky-cicd.yml/badge.svg)](https://github.com/nael-fridhi/tasky-app/actions/workflows/tasky-cicd.yml) ![codecov](https://codecov.io/gh/nael-fridhi/tasky-app/graph/badge.svg)
+![](https://img.shields.io/badge/golang-v1.18-blue)
+![](https://img.shields.io/badge/docs-in_progress-orange)
+![linesofcode](https://aschey.tech/tokei/github/nael-fridhi/tasky-app)
+![](https://img.shields.io/badge/license-MIT-violet)
+
+---
+
+## Docker
 A Dockerfile has been provided to run this application.  The default port exposed is 8080.
 
-# Environment Variables
+## Environment Variables
 The following environment variables are needed.
 |Variable|Purpose|example|
 |---|---|---|
@@ -10,7 +21,7 @@ The following environment variables are needed.
 
 Alternatively, you can create a `.env` file and load it up with the environment variables.
 
-# Running with Go
+## Running with Go
 
 Clone the repository into a directory of your choice Run the command `go mod tidy` to download the necessary packages.
 
@@ -19,7 +30,7 @@ You'll also need to add `SECRET_KEY` to the .env file for JWT Authentication.
 
 Run the command `go run main.go` and the project should run on `locahost:8080`
 
-# License
+## License
 
 This project is licensed under the terms of the MIT license.
 
