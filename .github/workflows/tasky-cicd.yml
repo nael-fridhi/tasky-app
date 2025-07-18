@@ -1,4 +1,4 @@
-name: Tasky cicd 
+name: pipeline
 
 on:
   pull_request:
